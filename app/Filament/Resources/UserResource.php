@@ -45,7 +45,7 @@ class UserResource extends Resource
                     ->required()
                     ->placeholder('000.000.000-00')
                     ->mask('999.999.999-99')
-                    ->dehydrateStateUsing(fn ($state) => preg_replace('/\D/', '', $state)) // salva só dígitos
+                    ->dehydrateStateUsing(fn ($state) => preg_replace('/\D/', '', $state)) 
                     ->unique(ignoreRecord: true)
                     ->maxLength(14),
                 Forms\Components\DatePicker::make('data_nascimento')
