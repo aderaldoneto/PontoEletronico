@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -21,6 +22,8 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
+
+    protected static ?string $navigationLabel = 'Usuários';
 
     // protected static ?string $navigationGroup = 'Configuração';
 
@@ -60,8 +63,21 @@ class UserResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('password')
                     ->password()
-                    ->required()
+                    ->revealable()
+                    ->autocomplete('new-password')
+                    ->rule('confirmed')
+                    ->required(
+                        fn (string $context) => $context === 'create'
+                    )
+                    ->default('')
                     ->maxLength(255),
+                Forms\Components\TextInput::make('password_confirmation')
+                    ->label('Confirmar senha')
+                    ->password()
+                    ->revealable()
+                    ->autocomplete('new-password')
+                    ->required(fn (Get $get, string $context) => $context === 'create' || filled($get('password')))
+                    ->dehydrated(false),
                 Forms\Components\Select::make('role')
                     ->label('Cargo')
                     ->options(Role::options())
@@ -106,8 +122,7 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->visible(fn ($record) => $record->id !== $user->id),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
                     ->visible(fn ($record) => $record->id !== $user->id),
             ]);

@@ -19,6 +19,8 @@ class PontoResource extends Resource
 {
     protected static ?string $model = Ponto::class;
 
+    protected static ?string $navigationLabel = 'Ponto';
+
     protected static ?string $navigationIcon = 'heroicon-o-clock';
 
     public static function form(Form $form): Form
