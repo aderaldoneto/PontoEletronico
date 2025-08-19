@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -36,16 +37,15 @@ class PontoResource extends Resource
                     ->label(__('Horário'))
                     ->dateTime('d/m/Y H:i:s'),
             ])
-            ->filters([
-                //
-            ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
+            ->groups([
+                Group::make('created_at')
+                    ->label('Mês')
+                    ->getKeyFromRecordUsing(fn (Ponto $r) => $r->created_at->format('Y-m'))
+                    ->getTitleFromRecordUsing(fn (Ponto $r) => $r->created_at->translatedFormat('F/Y'))
+                    ->collapsible(),
+            ])
+            ->defaultGroup('created_at')
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getPages(): array

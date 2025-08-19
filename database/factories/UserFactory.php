@@ -26,11 +26,13 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'cpf' => fake()->unique()->numerify('###########'),
+            'data_nascimento' => fake()->dateTimeBetween('-50 years', '-18 years')->format('Y-m-d'),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'role' => Role::EMPLOYEE->value, 
+            'role' => Role::ADMIN->value, 
             'created_by' => 1, 
         ];
     }

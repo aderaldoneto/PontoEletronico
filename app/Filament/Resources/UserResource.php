@@ -22,6 +22,15 @@ class UserResource extends Resource
 
     // protected static ?string $navigationGroup = 'Configuração';
 
+    public static function canAccess(): bool
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        // return $user->role === Role::ADMIN;
+        return true; 
+    }
+
     public static function form(Form $form): Form
     {
         return $form
