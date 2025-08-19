@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\Role;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\AddressRelationManager;
 use App\Models\User;
 use Carbon\Carbon;
 use Filament\Forms;
@@ -115,7 +116,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AddressRelationManager::class,
         ];
     }
 

@@ -87,4 +87,9 @@ class User extends Authenticatable
         return $this->hasMany(Ponto::class);
     }
 
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
+
 }
