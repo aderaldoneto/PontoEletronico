@@ -12,5 +12,6 @@ class UserObserver
         if (! $user->created_by) {
             $user->created_by = auth()->id();
         }
+
     }
 }
