@@ -5,7 +5,7 @@ return [
     'actions' => [
 
         'logout' => [
-            'label' => 'Logout',
+            'label' => 'Sair',
         ],
 
     ],

@@ -11,7 +11,7 @@ return [
         ],
 
         'logout' => [
-            'label' => 'Logout',
+            'label' => 'Sair',
         ],
 
         'open_database_notifications' => [
