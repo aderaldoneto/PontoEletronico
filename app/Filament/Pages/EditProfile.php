@@ -16,7 +16,7 @@ use Illuminate\Validation\Rules\Password;
 
 class EditProfile extends \Filament\Pages\Auth\EditProfile
 {
-     public static function getLabel(): string
+    public static function getLabel(): string
     {
         return __('Editar perfil');
     }
